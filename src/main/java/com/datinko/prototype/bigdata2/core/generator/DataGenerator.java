@@ -13,6 +13,11 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.joda.money.Money;
 import org.joda.time.DateTime;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -56,7 +61,7 @@ public class DataGenerator {
     }
 
 
-    public List<Bet> generatePseudoRandomAnonymousBets(DateTime startTime, int numberOfBetsToGenerate, int maxMsBetSpacing, int minMsBetSpacing) throws JsonProcessingException {
+    public List<Bet> generatePseudoRandomAnonymousBetsInCSV(DateTime startTime, int numberOfBetsToGenerate, int maxMsBetSpacing, int minMsBetSpacing) throws JsonProcessingException {
 
         DateTime timestamp = startTime;
 
@@ -69,24 +74,123 @@ public class DataGenerator {
         //int identifiedCustomer = 100;
         List<Bet> bets = new ArrayList<>();
 
-        for (int i = 0; i < numberOfBetsToGenerate; i++) {
-            Bet bet = null;
+        File file = new File("c:\\randombetdata.txt");
+        Writer fileWriter = null;
+        BufferedWriter bufferedWriter = null;
 
-            int millisecondBetSpacing = rand.nextInt(maxMsBetSpacing) + minMsBetSpacing;
-            timestamp = timestamp.plusMillis(millisecondBetSpacing);
+        try {
 
-            int typeOfBet = rand.nextInt(100);
-            if (typeOfBet <= anonymousRetailPercentage) {
-                bet = randomBetFactory.generateAnonymousRetailRandomBet(timestamp);
-            } else if (typeOfBet <= anonymousOnlineAndMobilePercentage) {
-                bet = randomBetFactory.generateAnonymousOnlineOrMobileRandomBet(timestamp);
+            fileWriter = new FileWriter(file);
+            bufferedWriter = new BufferedWriter(fileWriter);
+
+
+            for (int i = 0; i < numberOfBetsToGenerate; i++) {
+                Bet bet = null;
+
+                int millisecondBetSpacing = rand.nextInt(maxMsBetSpacing) + minMsBetSpacing;
+                timestamp = timestamp.plusMillis(millisecondBetSpacing);
+
+                int typeOfBet = rand.nextInt(100);
+                if (typeOfBet <= anonymousRetailPercentage) {
+                    bet = randomBetFactory.generateAnonymousRetailRandomBet(timestamp);
+                } else if (typeOfBet <= anonymousOnlineAndMobilePercentage) {
+                    bet = randomBetFactory.generateAnonymousOnlineOrMobileRandomBet(timestamp);
+                }
+                //else if (typeOfBet <= identifiedCustomer) {
+                //                bet = randomBetFactory.generateRandomBet(timestamp);
+                //            }
+
+                bets.add(bet);
+
+                //System.out.println(mapper.writeValueAsString(bet));
+                System.out.println(bet.toString());
+
+
+                bufferedWriter.write(bet.toString());
+                bufferedWriter.newLine();
             }
-            //else if (typeOfBet <= identifiedCustomer) {
-//                bet = randomBetFactory.generateRandomBet(timestamp);
-//            }
-            bets.add(bet);
-            //System.out.println(mapper.writeValueAsString(bet));
-            System.out.println(bet.toString());
+
+
+        } catch (IOException e) {
+            System.err.println("Error writing the file : ");
+            e.printStackTrace();
+        } finally {
+
+            if (bufferedWriter != null && fileWriter != null) {
+                try {
+                    bufferedWriter.close();
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return bets;
+    }
+
+    public List<Bet> generatePseudoRandomAnonymousBetsInJSON(DateTime startTime, int numberOfBetsToGenerate, int maxMsBetSpacing, int minMsBetSpacing) throws JsonProcessingException {
+
+        DateTime timestamp = startTime;
+
+        //we use this to weight the number of bets of each type created:
+        // 60% anonymous retail
+        // 25% anonymous online or mobile
+        // 15% identified customer bets  (will probably used identified customers as our scenario data)
+        int anonymousRetailPercentage = 70;
+        int anonymousOnlineAndMobilePercentage = 100;
+        //int identifiedCustomer = 100;
+        List<Bet> bets = new ArrayList<>();
+
+        File file = new File("c:\\randombetdata.json");
+        Writer fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+
+        try {
+
+            fileWriter = new FileWriter(file);
+            bufferedWriter = new BufferedWriter(fileWriter);
+
+
+            for (int i = 0; i < numberOfBetsToGenerate; i++) {
+                Bet bet = null;
+
+                int millisecondBetSpacing = rand.nextInt(maxMsBetSpacing) + minMsBetSpacing;
+                timestamp = timestamp.plusMillis(millisecondBetSpacing);
+
+                int typeOfBet = rand.nextInt(100);
+                if (typeOfBet <= anonymousRetailPercentage) {
+                    bet = randomBetFactory.generateAnonymousRetailRandomBet(timestamp);
+                } else if (typeOfBet <= anonymousOnlineAndMobilePercentage) {
+                    bet = randomBetFactory.generateAnonymousOnlineOrMobileRandomBet(timestamp);
+                }
+                //else if (typeOfBet <= identifiedCustomer) {
+                //                bet = randomBetFactory.generateRandomBet(timestamp);
+                //            }
+
+                bets.add(bet);
+
+                System.out.println(mapper.writeValueAsString(bet));
+                //System.out.println(bet.toString());
+
+
+                bufferedWriter.write(bet.toString());
+                bufferedWriter.newLine();
+            }
+
+
+        } catch (IOException e) {
+            System.err.println("Error writing the file : ");
+            e.printStackTrace();
+        } finally {
+
+            if (bufferedWriter != null && fileWriter != null) {
+                try {
+                    bufferedWriter.close();
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return bets;
     }
@@ -121,7 +225,7 @@ public class DataGenerator {
             Bet bet = randomBetFactory.generateRandomAnonymousLowValueBetOnMiddlesbroughToWin(timestamp);
 
             bets.add(bet);
-            System.out.println("["+bet.toString()+"]");
+            System.out.println(bet.toString());
         }
         return bets;
     }
@@ -138,7 +242,7 @@ public class DataGenerator {
             Bet bet = randomBetFactory.generateRandomAnonymousUltraHighValueBetOnLeedsToWin(timestamp);
 
             bets.add(bet);
-            System.out.println("["+bet.toString()+"]");
+            System.out.println(bet.toString());
         }
         return bets;
     }
@@ -152,7 +256,7 @@ public class DataGenerator {
         //generate first marker player bet
         Bet bet = BetFactory.getSteveJonesBetting50KOnlineForBristolToWin(startTime);
         bets.add(bet);
-        System.out.println("["+bet.toString()+"]");
+        System.out.println(bet.toString());
 
         //generate 'filler' bets
         for (int i = 0; i < numberOfBetsToGenerate; i++) {
@@ -162,13 +266,13 @@ public class DataGenerator {
             bet = randomBetFactory.generateRandomAnonymousLowValueBet(timestamp);
 
             bets.add(bet);
-            System.out.println("["+bet.toString()+"]");
+            System.out.println(bet.toString());
         }
 
         //generate second marker player bet
         bet = BetFactory.getEmmaGreenBetting10KOnlineForBristolToWin(startTime);
         bets.add(bet);
-        System.out.println("["+bet.toString()+"]");
+        System.out.println(bet.toString());
 
         return bets;
     }

@@ -4,6 +4,8 @@ Execute with:
 1. mvn clean package
 2. java -jar .\target\bigdata2-1.0-SNAPSHOT-jar-with-dependencies.jar test c:\Users\Neil\IdealProjects\bigdata2\src\main\resources\flight.json
 
+3. For the rest producer:  (I think!  untested!!)
+java -jar .\target\bigdata2-1.0-SNAPSHOT-jar-with-dependencies.jar http://localhost/whateverendpoint c:\Users\Neil\IdealProjects\bigdata2\src\main\resources\highvolumebetdata
 
 https://github.com/zdata-inc/SimpleKafkaProducer
 http://zdatainc.com/2014/08/real-time-streaming-apache-spark-streaming/

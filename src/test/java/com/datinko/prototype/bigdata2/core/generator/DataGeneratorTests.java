@@ -20,14 +20,24 @@ public class DataGeneratorTests {
 
     }
 
-    //Use this test to generate the background betting stream
+    //Use this test to generate the background betting stream IN JSON  (for use in Kafka Producer)
     @Test
-    public void canGeneratePsuedoRandomAnonymousBetsForKnownEvents() throws JsonProcessingException {
+    public void canGeneratePsuedoRandomAnonymousBetsForKnownEventsInJSON() throws JsonProcessingException {
 
         DataGenerator generator = new DataGenerator();
 
         DateTime startTime = DateTime.now().plusMinutes(16);
-        generator.generatePseudoRandomAnonymousBets(startTime, 2000, 500, 10000);
+        generator.generatePseudoRandomAnonymousBetsInJSON(startTime, 25000, 500, 10000);
+    }
+
+    //Use this test to generate the background betting stream IN CSV  (for use in Zeppelin)
+    @Test
+    public void canGeneratePsuedoRandomAnonymousBetsForKnownEventsInCSV() throws JsonProcessingException {
+
+        DataGenerator generator = new DataGenerator();
+
+        DateTime startTime = DateTime.now().plusMinutes(16);
+        generator.generatePseudoRandomAnonymousBetsInCSV(startTime, 25000, 500, 10000);
     }
 
     //Use this test to generate the high volume, high speed betting on one selection
@@ -44,7 +54,7 @@ public class DataGeneratorTests {
     //Use this test to generate the high stake betting on one selection
     //Generates two ultra-high value bets (£10,000 - £500,000) on Leeds to win within a maxiumum of 20 seconds
     @Test
-    public void canGenerateHighValueAnonymousBetsForLeedsToWin() throws JsonProcessingException {
+    public void canGenerateUltraHighValueAnonymousBetsForLeedsToWin() throws JsonProcessingException {
 
         DataGenerator generator = new DataGenerator();
 
