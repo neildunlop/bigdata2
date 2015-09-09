@@ -173,7 +173,7 @@ public class DataGenerator {
                 //System.out.println(bet.toString());
 
 
-                bufferedWriter.write(bet.toString());
+                bufferedWriter.write(mapper.writeValueAsString(bet));
                 bufferedWriter.newLine();
             }
 
