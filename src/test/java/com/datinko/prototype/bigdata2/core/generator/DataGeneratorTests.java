@@ -20,6 +20,7 @@ public class DataGeneratorTests {
 
     }
 
+    //Use this test to generate the background betting stream
     @Test
     public void canGeneratePsuedoRandomAnonymousBetsForKnownEvents() throws JsonProcessingException {
 
@@ -27,8 +28,39 @@ public class DataGeneratorTests {
 
         DateTime startTime = DateTime.now().plusMinutes(16);
         generator.generatePseudoRandomAnonymousBets(startTime, 2000, 500, 10000);
-
     }
 
+    //Use this test to generate the high volume, high speed betting on one selection
+    //Generates 100 bets on Middlesbrough To win within a maximum of 50 seconds
+    @Test
+    public void canGenerateHighVolumeAnonymousBetsForMiddlesbroughToWin() throws JsonProcessingException {
 
+        DataGenerator generator = new DataGenerator();
+
+        DateTime startTime = DateTime.now().plusMinutes(16);
+        generator.generateHighVolumeAnonymousBetsForMiddlesbroughToWin(startTime, 500, 5, 100);
+    }
+
+    //Use this test to generate the high stake betting on one selection
+    //Generates two ultra-high value bets (£10,000 - £500,000) on Leeds to win within a maxiumum of 20 seconds
+    @Test
+    public void canGenerateHighValueAnonymousBetsForLeedsToWin() throws JsonProcessingException {
+
+        DataGenerator generator = new DataGenerator();
+
+        DateTime startTime = DateTime.now().plusMinutes(16);
+        generator.generateUltaHighValueAnonymousBetsForLeedsToWin(startTime, 10000, 5000, 2);
+    }
+
+    //Use this to generate a marker player betting sequence
+    //Generate Steve Jones and Emma Green 50k and 10k, Bristol to win. 3 intervening random bets
+    //All fired within 5 seconds
+    @Test
+    public void canGenerateMarkerPlayerBettingSequence() {
+
+        DataGenerator generator = new DataGenerator();
+
+        DateTime startTime = DateTime.now().plusMinutes(16);
+        generator.generateMarkerPlayerBettingSequence(startTime, 1000, 500, 3);
+    }
 }

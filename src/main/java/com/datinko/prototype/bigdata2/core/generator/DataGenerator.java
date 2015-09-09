@@ -1,6 +1,7 @@
 package com.datinko.prototype.bigdata2.core.generator;
 
 import com.datinko.prototype.bigdata2.core.Bet;
+import com.datinko.prototype.bigdata2.core.factories.BetFactory;
 import com.datinko.prototype.bigdata2.core.factories.random.RandomBetFactory;
 import com.datinko.prototype.bigdata2.core.serializer.MoneyDeserializer;
 import com.datinko.prototype.bigdata2.core.serializer.MoneySerializer;
@@ -107,24 +108,67 @@ public class DataGenerator {
         return bets;
     }
 
-    public List<Bet> generateRandomAnonymousLowValueHighFrequencyBets(int numberOfBetsToGenerate, int maxMsBetSpacing, int minMsBetSpacing) throws JsonProcessingException {
+    public List<Bet> generateHighVolumeAnonymousBetsForMiddlesbroughToWin(DateTime startTime, int maxMsBetSpacing, int minMsBetSpacing, int numberOfBetsToGenerate) {
 
-        //TODO: Hard code the min and max bet spacing so that lots of small bets are created quickly
-        DateTime timestamp = DateTime.now();
-
+        DateTime timestamp = startTime;
         List<Bet> bets = new ArrayList<>();
 
         for (int i = 0; i < numberOfBetsToGenerate; i++) {
             int millisecondBetSpacing = rand.nextInt(maxMsBetSpacing) + minMsBetSpacing;
             timestamp = timestamp.plusMillis(millisecondBetSpacing);
 
-            Bet bet = randomBetFactory.generateRandomAnonymousLowValueBet(timestamp);
+            Bet bet = randomBetFactory.generateRandomAnonymousLowValueBetOnMiddlesbroughToWin(timestamp);
 
             bets.add(bet);
-            System.out.println(mapper.writeValueAsString(bet));
+            System.out.println("["+bet.toString()+"]");
         }
         return bets;
-
     }
 
+    public List<Bet> generateUltaHighValueAnonymousBetsForLeedsToWin(DateTime startTime, int maxMsBetSpacing, int minMsBetSpacing, int numberOfBetsToGenerate) {
+
+        DateTime timestamp = startTime;
+        List<Bet> bets = new ArrayList<>();
+
+        for (int i = 0; i < numberOfBetsToGenerate; i++) {
+            int millisecondBetSpacing = rand.nextInt(maxMsBetSpacing) + minMsBetSpacing;
+            timestamp = timestamp.plusMillis(millisecondBetSpacing);
+
+            Bet bet = randomBetFactory.generateRandomAnonymousUltraHighValueBetOnLeedsToWin(timestamp);
+
+            bets.add(bet);
+            System.out.println("["+bet.toString()+"]");
+        }
+        return bets;
+    }
+
+
+    public List<Bet> generateMarkerPlayerBettingSequence(DateTime startTime, int maxMsBetSpacing, int minMsBetSpacing, int numberOfBetsToGenerate) {
+
+        DateTime timestamp = startTime;
+        List<Bet> bets = new ArrayList<>();
+
+        //generate first marker player bet
+        Bet bet = BetFactory.getSteveJonesBetting50KOnlineForBristolToWin(startTime);
+        bets.add(bet);
+        System.out.println("["+bet.toString()+"]");
+
+        //generate 'filler' bets
+        for (int i = 0; i < numberOfBetsToGenerate; i++) {
+            int millisecondBetSpacing = rand.nextInt(maxMsBetSpacing) + minMsBetSpacing;
+            timestamp = timestamp.plusMillis(millisecondBetSpacing);
+
+            bet = randomBetFactory.generateRandomAnonymousLowValueBet(timestamp);
+
+            bets.add(bet);
+            System.out.println("["+bet.toString()+"]");
+        }
+
+        //generate second marker player bet
+        bet = BetFactory.getEmmaGreenBetting10KOnlineForBristolToWin(startTime);
+        bets.add(bet);
+        System.out.println("["+bet.toString()+"]");
+
+        return bets;
+    }
 }

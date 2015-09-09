@@ -1,6 +1,7 @@
 package com.datinko.prototype.bigdata2.core.factories.random;
 
 import com.datinko.prototype.bigdata2.core.Bet;
+import com.datinko.prototype.bigdata2.core.factories.SelectionFactory;
 import org.joda.time.DateTime;
 
 import java.util.UUID;
@@ -97,6 +98,34 @@ public class RandomBetFactory {
                 .withLocation(randomLocationFactory.getRandomOnlineOrMobileLocation())
                 .withSelection(randomSelectionFactory.getRandomSelection())
                 .withStake(randomStakeFactory.getRandomLowValueStake())
+                .withTimestamp(timestamp)
+                .build();
+
+        return randomBet;
+    }
+
+    public Bet generateRandomAnonymousLowValueBetOnMiddlesbroughToWin(DateTime timestamp) {
+
+        Bet randomBet = Bet.newBuilder()
+                .withCustomer(randomCustomerFactory.getAnonymousCustomer())
+                .withId(UUID.randomUUID())
+                .withLocation(randomLocationFactory.getRandomLocation())
+                .withSelection(SelectionFactory.getMiddlesbroughToWin())
+                .withStake(randomStakeFactory.getRandomLowValueStake())
+                .withTimestamp(timestamp)
+                .build();
+
+        return randomBet;
+    }
+
+    public Bet generateRandomAnonymousUltraHighValueBetOnLeedsToWin(DateTime timestamp) {
+
+        Bet randomBet = Bet.newBuilder()
+                .withCustomer(randomCustomerFactory.getAnonymousCustomer())
+                .withId(UUID.randomUUID())
+                .withLocation(randomLocationFactory.getRandomLocation())
+                .withSelection(SelectionFactory.getLeedsToWin())
+                .withStake(randomStakeFactory.getRandomUltraHighValueStake())
                 .withTimestamp(timestamp)
                 .build();
 

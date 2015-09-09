@@ -44,7 +44,7 @@ public class BetFactory {
 
     public static Bet getAmyBrownBetting10OnMiddlesbroughToWinFromLeedsMerrion(DateTime timestamp) {
 
-        UUID id = UUID.randomUUID();
+        UUID id = UUID.fromString("d84075e7-b43f-45ba-99c5-f2371ee40616");
         Customer testCustomer = CustomerFactory.getAmyBrown();
         Location testLocation = LocationFactory.getWHLeedsMerrion();
         Selection testSelection = SelectionFactory.getMiddlesbroughToWin();
@@ -87,4 +87,45 @@ public class BetFactory {
         return bet;
     }
 
+    //Steve Jones - High Value Bet
+    public static Bet getSteveJonesBetting50KOnlineForBristolToWin(DateTime timestamp) {
+
+        UUID id = UUID.randomUUID();
+        Customer testCustomer = CustomerFactory.getSteveJones();
+        Location testLocation = LocationFactory.getWHAnonymousOnline();
+        Selection testSelection = SelectionFactory.getBristolToWin();
+        Money testStake = Money.parse("GBP 50000");
+
+        Bet bet = Bet.newBuilder()
+                .withId(id)
+                .withCustomer(testCustomer)
+                .withLocation(testLocation)
+                .withSelection(testSelection)
+                .withStake(testStake)
+                .withTimestamp(timestamp)
+                .build();
+
+        return bet;
+    }
+
+    //Emma Green - High Value Bet
+    public static Bet getEmmaGreenBetting10KOnlineForBristolToWin(DateTime timestamp) {
+
+        UUID id = UUID.randomUUID();
+        Customer testCustomer = CustomerFactory.getEmmaGreen();
+        Location testLocation = LocationFactory.getWHAnonymousOnline();
+        Selection testSelection = SelectionFactory.getBristolToWin();
+        Money testStake = Money.parse("GBP 10000");
+
+        Bet bet = Bet.newBuilder()
+                .withId(id)
+                .withCustomer(testCustomer)
+                .withLocation(testLocation)
+                .withSelection(testSelection)
+                .withStake(testStake)
+                .withTimestamp(timestamp)
+                .build();
+
+        return bet;
+    }
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 /**
  * Representation of a bet placed by a customer.
  */
-@JsonDeserialize(builder=Bet.Builder.class)
+@JsonDeserialize(builder = Bet.Builder.class)
 public class Bet {
 
     protected final UUID id;
@@ -51,6 +51,24 @@ public class Bet {
         location = builder.location;
         selection = builder.selection;
         stake = builder.stake;
+    }
+
+    @Override
+    public String toString() {
+
+        String result = "";
+
+        result += "\""+this.id + "\","
+                + "\""+this.timestamp + "\","
+                + "\"" + this.customer.getName() + "\","
+                + "\"" + this.location.getAddress() + "\","
+                + "\""+this.location.getChannel() + "\","
+                + "\""+this.selection.getSelectionValue() + "\","
+                + "\""+this.selection.getPrice() + "\","
+                + "\""+this.selection.getMarket().getName() + "\","
+                + "\""+this.selection.getMarket().getEvent().getName() + "\","
+                + "\""+this.stake + "\"";
+        return result;
     }
 
     public static Builder newBuilder() {

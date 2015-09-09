@@ -1,5 +1,6 @@
 package com.datinko.prototype.bigdata2.core;
 
+import com.datinko.prototype.bigdata2.core.factories.BetFactory;
 import com.datinko.prototype.bigdata2.core.factories.CustomerFactory;
 import com.datinko.prototype.bigdata2.core.factories.LocationFactory;
 import com.datinko.prototype.bigdata2.core.factories.SelectionFactory;
@@ -15,6 +16,7 @@ import org.joda.time.DateTime;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.UUID;
 
 import static junit.framework.Assert.assertEquals;
@@ -113,7 +115,15 @@ public class BetTest {
         Money testStake = Money.parse("GBP 20");
         DateTime timestamp = DateTime.now();
 
-        String expectedJson = "{\"id\":\"c84a7630-8e06-4996-8adb-a2632dd2aa9e\",\"timestamp\":\"2015-09-05T19:35:58.724Z\",\"customer\":{\"id\":\"caff853f-3a50-412c-a5fa-23551c22b3fd\",\"name\":\"Bob Smith\"},\"location\":{\"id\":\"ccdc8e20-d0ae-4afe-a638-1cd8416a08f7\",\"address\":\"Saint John Street, Merrion St, Leeds LS2 8LQ\",\"channel\":\"RETAIL\"},\"selection\":{\"id\":\"a4e7ea00-7514-4a08-98b0-0ee7d389cc9d\",\"selectionValue\":\"Middlesbrough\",\"price\":\"2/1\",\"market\":{\"id\":\"13478342-688a-4bcb-a305-3f990f8f2c85\",\"name\":\"To Win\",\"event\":{\"id\":\"709da48e-9bfa-4255-afda-bb00725958d8\",\"name\":\"Middlesbrough Vs Hull\"}}},\"stake\":\"GBP 20.00\"}";
+        String expectedJson = "{\"id\":\"c84a7630-8e06-4996-8adb-a2632dd2aa9e\",\"timestamp\":\"2015-09-05T19:35:58.724Z\"," +
+                "\"customer\":{\"id\":\"caff853f-3a50-412c-a5fa-23551c22b3fd\",\"name\":\"Bob Smith\"}," +
+                "\"location\":{\"id\":\"ccdc8e20-d0ae-4afe-a638-1cd8416a08f7\"," +
+                "\"address\":\"Saint John Street,  Merrion St, Leeds LS2 8LQ\"," +
+                "\"channel\":\"RETAIL\"}," +
+                "\"selection\":{\"id\":\"a4e7ea00-7514-4a08-98b0-0ee7d389cc9d\",\"selectionValue\":\"Middlesbrough\",\"price\":\"2/1\"," +
+                "\"market\":{\"id\":\"13478342-688a-4bcb-a305-3f990f8f2c85\",\"name\":\"To Win\"," +
+                "\"event\":{\"id\":\"709da48e-9bfa-4255-afda-bb00725958d8\",\"name\":\"Middlesbrough Vs Hull\"}}}," +
+                "\"stake\":\"GBP 20.00\"}";
 
         Bet testBet = Bet.newBuilder()
                 .withId(id)
@@ -128,6 +138,27 @@ public class BetTest {
 
         assertNotNull(result);
         assertEquals(expectedJson, result);
+    }
+
+    @Test
+    public void toStringWorksAsExpected() {
+
+        DateTime betTime = DateTime.now();
+
+        String expectedResult = "\"d84075e7-b43f-45ba-99c5-f2371ee40616\",\""+betTime.toString()+"\"," +
+                "\"Amy Brown\"," +
+                "\"Saint John Street, Merrion St, Leeds LS2 8LQ\"," +
+                "\"RETAIL\"," +
+                "\"Middlesbrough\"," +
+                "\"5/4\"," +
+                "\"To Win\"," +
+                "\"Middlesbrough Vs Hull\"," +
+                "\"GBP 10.00\"";
+        Bet bet = BetFactory.getAmyBrownBetting10OnMiddlesbroughToWinFromLeedsMerrion(betTime);
+
+        String result = bet.toString();
+
+        assertEquals(expectedResult, result);
 
     }
 

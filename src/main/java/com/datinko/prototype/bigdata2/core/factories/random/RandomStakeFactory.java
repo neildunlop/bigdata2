@@ -98,6 +98,12 @@ public class RandomStakeFactory {
         return highValueStakes.get(index);
     }
 
+    public Money getRandomUltraHighValueStake() {
+
+        int index = rand.nextInt(ultraHighValueStakes.size() - 1);
+        return ultraHighValueStakes.get(index);
+    }
+
     public Money getRandomLowValueStake() {
 
         int index = rand.nextInt(lowValueStakes.size() - 1);
