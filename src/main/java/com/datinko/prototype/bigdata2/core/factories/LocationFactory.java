@@ -14,7 +14,8 @@ public class LocationFactory {
     public static Location getWHLeedsMerrion() {
 
         UUID id = UUID.fromString("ccdc8e20-d0ae-4afe-a638-1cd8416a08f7");
-        String address = "Saint John Street, Merrion St, Leeds LS2 8LQ";
+        //String address = "Saint John Street, Merrion St, Leeds LS2 8LQ";
+        String address = "Merrion Centre";
         ChannelType channelType = ChannelType.RETAIL;
 
         Location location = Location.newBuilder()
@@ -29,7 +30,8 @@ public class LocationFactory {
     public static Location getWHLeedsBoarLane() {
 
         UUID id = UUID.fromString("a787268e-803c-4bf0-a765-2146a0aef2a6");
-        String address = "23 Boar Ln, Leeds, West Yorkshire LS1 6EA";
+        //String address = "23 Boar Ln, Leeds, West Yorkshire LS1 6EA";
+        String address = "Boar Lane";
         ChannelType channelType = ChannelType.RETAIL;
 
         Location location = Location.newBuilder()
@@ -44,7 +46,8 @@ public class LocationFactory {
     public static Location getWHLeedsStreetLane() {
 
         UUID id = UUID.fromString("315b7b16-b6ea-493a-806b-0bd93c7c1d19");
-        String address = "81 Street Ln, Leeds, West Yorkshire LS8 1AP";
+        //String address = "81 Street Ln, Leeds, West Yorkshire LS8 1AP";
+        String address = "Street Lane";
         ChannelType channelType = ChannelType.RETAIL;
 
         Location location = Location.newBuilder()
@@ -59,7 +62,8 @@ public class LocationFactory {
     public static Location getWHLeedsCrossgates() {
 
         UUID id = UUID.fromString("a79ba50c-5c5b-44bc-8b3d-4d8b706b24d1");
-        String address = "H-K Crossgates Shopping Centre, Leeds LS15 8EU";
+        //String address = "H-K Crossgates Shopping Centre, Leeds LS15 8EU";
+        String address = "Crossgates Shopping Centre";
         ChannelType channelType = ChannelType.RETAIL;
 
         Location location = Location.newBuilder()
@@ -74,7 +78,8 @@ public class LocationFactory {
     public static Location getWHLeedsPrimroseLane() {
 
         UUID id = UUID.fromString("e6e89876-882c-462e-a5eb-5cada4d7c662");
-        String address = "1 Primrose Lane, Halton, Leeds LS15 7HS";
+        //String address = "1 Primrose Lane, Halton, Leeds LS15 7HS";
+        String address = "Primrose Lane";
         ChannelType channelType = ChannelType.RETAIL;
 
         Location location = Location.newBuilder()
@@ -115,7 +120,4 @@ public class LocationFactory {
 
         return location;
     }
-
-    //TODO: Add user specific internet locations (for some)
-    //TODO: Add user specific mobile locations (for some)
 }

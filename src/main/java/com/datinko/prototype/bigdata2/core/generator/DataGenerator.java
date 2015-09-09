@@ -85,7 +85,8 @@ public class DataGenerator {
 //                bet = randomBetFactory.generateRandomBet(timestamp);
 //            }
             bets.add(bet);
-            System.out.println(mapper.writeValueAsString(bet));
+            //System.out.println(mapper.writeValueAsString(bet));
+            System.out.println(bet.toString());
         }
         return bets;
     }

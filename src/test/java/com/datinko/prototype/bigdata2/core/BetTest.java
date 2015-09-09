@@ -118,7 +118,7 @@ public class BetTest {
         String expectedJson = "{\"id\":\"c84a7630-8e06-4996-8adb-a2632dd2aa9e\",\"timestamp\":\"2015-09-05T19:35:58.724Z\"," +
                 "\"customer\":{\"id\":\"caff853f-3a50-412c-a5fa-23551c22b3fd\",\"name\":\"Bob Smith\"}," +
                 "\"location\":{\"id\":\"ccdc8e20-d0ae-4afe-a638-1cd8416a08f7\"," +
-                "\"address\":\"Saint John Street,  Merrion St, Leeds LS2 8LQ\"," +
+                "\"address\":\"Merrion Centre\"," +
                 "\"channel\":\"RETAIL\"}," +
                 "\"selection\":{\"id\":\"a4e7ea00-7514-4a08-98b0-0ee7d389cc9d\",\"selectionValue\":\"Middlesbrough\",\"price\":\"2/1\"," +
                 "\"market\":{\"id\":\"13478342-688a-4bcb-a305-3f990f8f2c85\",\"name\":\"To Win\"," +
@@ -145,15 +145,15 @@ public class BetTest {
 
         DateTime betTime = DateTime.now();
 
-        String expectedResult = "\"d84075e7-b43f-45ba-99c5-f2371ee40616\",\""+betTime.toString()+"\"," +
-                "\"Amy Brown\"," +
-                "\"Saint John Street, Merrion St, Leeds LS2 8LQ\"," +
-                "\"RETAIL\"," +
-                "\"Middlesbrough\"," +
-                "\"5/4\"," +
-                "\"To Win\"," +
-                "\"Middlesbrough Vs Hull\"," +
-                "\"GBP 10.00\"";
+        String expectedResult = "d84075e7-b43f-45ba-99c5-f2371ee40616,"+betTime.toString()+"," +
+                "Amy Brown," +
+                "Merrion Centre," +
+                "RETAIL," +
+                "Middlesbrough," +
+                "5/4," +
+                "To Win," +
+                "Middlesbrough Vs Hull," +
+                "10.00";
         Bet bet = BetFactory.getAmyBrownBetting10OnMiddlesbroughToWinFromLeedsMerrion(betTime);
 
         String result = bet.toString();

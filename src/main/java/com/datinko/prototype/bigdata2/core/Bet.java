@@ -58,16 +58,27 @@ public class Bet {
 
         String result = "";
 
-        result += "\""+this.id + "\","
-                + "\""+this.timestamp + "\","
-                + "\"" + this.customer.getName() + "\","
-                + "\"" + this.location.getAddress() + "\","
-                + "\""+this.location.getChannel() + "\","
-                + "\""+this.selection.getSelectionValue() + "\","
-                + "\""+this.selection.getPrice() + "\","
-                + "\""+this.selection.getMarket().getName() + "\","
-                + "\""+this.selection.getMarket().getEvent().getName() + "\","
-                + "\""+this.stake + "\"";
+//        result += "\""+this.id + "\","
+//                + "\""+this.timestamp + "\","
+//                + "\"" + this.customer.getName() + "\","
+//                + "\"" + this.location.getAddress() + "\","
+//                + "\""+this.location.getChannel() + "\","
+//                + "\""+this.selection.getSelectionValue() + "\","
+//                + "\""+this.selection.getPrice() + "\","
+//                + "\""+this.selection.getMarket().getName() + "\","
+//                + "\""+this.selection.getMarket().getEvent().getName() + "\","
+//                + this.stake.getAmount();
+
+        result += this.id + ","
+                + this.timestamp + ","
+                + this.customer.getName() + ","
+                + this.location.getAddress() + ","
+                + this.location.getChannel() + ","
+                + this.selection.getSelectionValue() + ","
+                + this.selection.getPrice() + ","
+                + this.selection.getMarket().getName() + ","
+                + this.selection.getMarket().getEvent().getName() + ","
+                + this.stake.getAmount();
         return result;
     }
 

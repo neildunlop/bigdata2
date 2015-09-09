@@ -16,7 +16,7 @@ public class LocationTest {
     public void canCreateLocation() {
 
         UUID id = UUID.randomUUID();
-        String address = "Saint John Street, Merrion St, Leeds LS2 8LQ";
+        String address = "Merrion Centre";
         ChannelType channelType = ChannelType.RETAIL;
 
         Location testLocation = Location.newBuilder()
