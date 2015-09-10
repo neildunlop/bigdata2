@@ -2,7 +2,7 @@ Simple Kafka Producer
 This is a simple threaded file based Kafka consumer. It reads data on one thread and buffers it over to the Kafka producer thread.
 Execute with:
 1. mvn clean package
-2. java -jar .\target\bigdata2-1.0-SNAPSHOT-jar-with-dependencies.jar test c:\Users\Neil\IdealProjects\bigdata2\src\main\resources\flight.json
+2. java -jar .\target\bigdata2-1.0-SNAPSHOT-jar-with-dependencies.jar test C:\Dev\bigdata2\src\main\resources\randombetdata.txt
 
 3. For the rest producer:  (I think!  untested!!)
 java -jar .\target\bigdata2-1.0-SNAPSHOT-jar-with-dependencies.jar http://localhost/whateverendpoint c:\Users\Neil\IdealProjects\bigdata2\src\main\resources\highvolumebetdata

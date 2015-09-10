@@ -3,6 +3,7 @@ package com.datinko.prototype.bigdata2.kafka.producer;
 import com.datinko.prototype.bigdata2.core.Bet;
 import com.datinko.prototype.bigdata2.core.serializer.MoneyDeserializer;
 import com.datinko.prototype.bigdata2.core.serializer.MoneySerializer;
+import com.datinko.prototype.bigdata2.rest.producer.RestProducer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -28,7 +29,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Kafka Producer that reads files from the file system and dispatches messages to a target Kafka topic.
+ * Kafka Producer that reads full json bet objects from the file system and dispatches messages to a target Kafka topic.
  */
 public class KafkaProducer implements Runnable {
 

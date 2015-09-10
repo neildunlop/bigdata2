@@ -38,7 +38,7 @@ public class KafkaThreadedTestProducer {
             LOGGER.debug("Setting up file reader");
             BufferedFileReader reader = new BufferedFileReader(filename, input);
             LOGGER.debug("Setting up kafka producer");
-            KafkaProducer kafkaProducer = new KafkaProducer(topic, send);
+            KafkaObjectArrayProducer kafkaProducer = new KafkaObjectArrayProducer(topic, send);
 
             LOGGER.debug("Spinning up threads");
             Thread source = new Thread(reader);
